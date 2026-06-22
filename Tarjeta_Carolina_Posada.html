@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Carolina Posada · Grupo Sancor Seguros</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    min-height: 100vh;
+    background: #1a2d6b;
+    background-image:
+      radial-gradient(ellipse at 80% 20%, rgba(123,31,90,0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 10% 80%, rgba(26,45,107,0.8) 0%, transparent 60%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 16px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);
+  }
+
+  /* ══ HEADER — imita el cartel de la oficina ══ */
+  .header {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Franja blanca superior (estilo "GRUPO SANCOR SEGUROS") */
+  .header-top {
+    background: #ffffff;
+    padding: 22px 24px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo-circle {
+    width: 52px; height: 52px; min-width: 52px;
+    background: #1a2d6b;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+
+  /* S estilizada de Sancor */
+  .logo-circle svg { width: 30px; height: 30px; }
+
+  .brand-text { line-height: 1.15; }
+  .brand-text .grupo { font-size: 11px; font-weight: 700; color: #1a2d6b; letter-spacing: 2px; text-transform: uppercase; }
+  .brand-text .sancor { font-size: 20px; font-weight: 900; color: #1a2d6b; letter-spacing: 1px; line-height: 1; }
+  .brand-text .seguros { font-size: 13px; font-weight: 700; color: #1a2d6b; letter-spacing: 3px; }
+
+  /* Franja vino inferior (estilo panel derecho del edificio) */
+  .header-bottom {
+    background: #7b1f5a;
+    padding: 14px 24px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .services {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .service-tag {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 9.5px;
+    color: rgba(255,255,255,0.9);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+
+  /* ══ NOMBRE ══ */
+  .name-section {
+    background: #1a2d6b;
+    padding: 20px 24px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .avatar {
+    width: 58px; height: 58px; min-width: 58px;
+    background: linear-gradient(135deg, #7b1f5a, #a03070);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800; color: white;
+    border: 2.5px solid rgba(255,255,255,0.25);
+    letter-spacing: -1px;
+  }
+
+  .name-info .name {
+    font-size: 22px; font-weight: 800; color: #fff;
+    letter-spacing: -0.3px; line-height: 1.1;
+  }
+
+  .name-info .title {
+    font-size: 12px; color: rgba(255,255,255,0.65);
+    margin-top: 4px; font-weight: 400; letter-spacing: 0.2px;
+  }
+
+  /* ══ CUERPO ══ */
+  .body {
+    background: #f5f6fa;
+    padding: 20px 20px 24px;
+  }
+
+  .data-row {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+    gap: 13px;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    text-decoration: none;
+    -webkit-user-select: none; user-select: none;
+  }
+
+  .data-row:active { transform: scale(0.975); box-shadow: none; }
+
+  .icon {
+    width: 40px; height: 40px; min-width: 40px;
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+
+  .icon-wine  { background: #f5e8f0; }
+  .icon-blue  { background: #e8edf8; }
+  .icon-green { background: #e6f5ec; }
+  .icon-gray  { background: #f0f0f5; }
+
+  .data-content { flex: 1; min-width: 0; overflow: hidden; }
+
+  .data-label {
+    font-size: 9.5px; color: #aaa;
+    font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; margin-bottom: 2px;
+  }
+
+  .data-value {
+    font-size: 13.5px; color: #1a2d6b;
+    font-weight: 700;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  .copy-btn {
+    background: none;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    padding: 6px 11px;
+    font-size: 11px; font-weight: 700;
+    color: #888; cursor: pointer;
+    transition: all 0.15s; white-space: nowrap;
+    font-family: inherit;
+  }
+
+  .copy-btn:active { background: #1a2d6b; color: white; border-color: #1a2d6b; transform: scale(0.95); }
+  .copy-btn.copied { background: #27ae60; color: white; border-color: #27ae60; }
+
+  /* ══ ACUERDO ══ */
+  .agreement-box {
+    background: linear-gradient(135deg, #1a2d6b, #2a4d9b);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .agreement-icon { font-size: 22px; }
+
+  .agreement-text .agreement-label {
+    font-size: 9.5px; font-weight: 700; color: rgba(255,255,255,0.6);
+    letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 3px;
+  }
+
+  .agreement-text .agreement-val {
+    font-size: 12px; color: #fff; font-weight: 600; line-height: 1.4;
+  }
+
+  /* ══ BOTONES ══ */
+  .actions { display: flex; gap: 10px; }
+
+  .btn {
+    flex: 1; padding: 14px 8px;
+    border-radius: 13px; font-size: 13px; font-weight: 700;
+    text-align: center; text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    transition: transform 0.1s, opacity 0.1s;
+    font-family: inherit; cursor: pointer; border: none;
+  }
+
+  .btn:active { transform: scale(0.95); opacity: 0.88; }
+
+  .btn-whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); color: white; }
+  .btn-email    { background: linear-gradient(135deg, #7b1f5a, #a0306e); color: white; }
+
+  /* ══ FOOTER ══ */
+  .footer {
+    background: #1a2d6b;
+    padding: 12px 16px;
+    text-align: center;
+  }
+
+  .footer-text { font-size: 10px; color: rgba(255,255,255,0.45); letter-spacing: 0.3px; }
+  .footer-text strong { color: rgba(255,255,255,0.75); }
+
+  /* ══ TOAST ══ */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%;
+    transform: translateX(-50%) translateY(70px);
+    background: #1a1a2e; color: white;
+    padding: 11px 22px; border-radius: 30px;
+    font-size: 13px; font-weight: 600;
+    opacity: 0; transition: all 0.28s ease;
+    pointer-events: none; z-index: 999; white-space: nowrap;
+  }
+
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- HEADER — estilo cartel de la oficina -->
+  <div class="header">
+
+    <!-- Panel blanco: logo + nombre marca -->
+    <div class="header-top">
+      <div class="logo-circle">
+        <!-- S-llama de Sancor simplificada en SVG -->
+        <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 4 C10 4, 7 8, 9 12 C11 16, 16 16, 18 20 C20 24, 17 27, 13 27 C17 27, 22 24, 21 19 C20 15, 15 14, 13 10 C11 6, 13 4, 15 4Z" fill="white" opacity="0.9"/>
+          <path d="M13 27 C9 27, 7 23, 9 19 C11 15, 16 15, 18 11 C20 7, 18 4, 15 4 C18 4, 22 7, 20 12 C18 16, 13 17, 11 21 C9 25, 11 27, 13 27Z" fill="white" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="grupo">Grupo</div>
+        <div class="sancor">SANCOR</div>
+        <div class="seguros">SEGUROS</div>
+      </div>
+    </div>
+
+    <!-- Panel bordo: servicios -->
+    <div class="header-bottom">
+      <div class="services">
+        <span class="service-tag">Sancor Seguros</span>
+        <span class="service-tag">Prevención ART</span>
+        <span class="service-tag">Prevención Salud</span>
+        <span class="service-tag">Prevención Retiro</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NOMBRE -->
+  <div class="name-section">
+    <div class="avatar">CP</div>
+    <div class="name-info">
+      <div class="name">Carolina Posada</div>
+      <div class="title">Productora Asesora de Seguros · PAS</div>
+    </div>
+  </div>
+
+  <!-- CUERPO -->
+  <div class="body">
+
+    <!-- WhatsApp -->
+    <div class="data-row" onclick="copyText('2966459102', this)">
+      <div class="icon icon-green">📱</div>
+      <div class="data-content">
+        <div class="data-label">WhatsApp / Teléfono</div>
+        <div class="data-value">+54 9 2966 459102</div>
+      </div>
+      <button class="copy-btn" onclick="event.stopPropagation(); copyText('2966459102', this)">Copiar</button>
+    </div>
+
+    <!-- Email -->
+    <div class="data-row" onclick="copyText('asesoracarolinaposada@sancorsegurosrg.com.ar', this)">
+      <div class="icon icon-wine">✉️</div>
+      <div class="data-content">
+        <div class="data-label">Email</div>
+        <div class="data-value">asesoracarolinaposada@sancorsegurosrg.com.ar</div>
+      </div>
+      <button class="copy-btn" onclick="event.stopPropagation(); copyText('asesoracarolinaposada@sancorsegurosrg.com.ar', this)">Copiar</button>
+    </div>
+
+    <!-- Dirección -->
+    <div class="data-row" onclick="copyText('Pte. Raúl Alfonsín 327, Río Gallegos, Santa Cruz', this)">
+      <div class="icon icon-blue">📍</div>
+      <div class="data-content">
+        <div class="data-label">Dirección</div>
+        <div class="data-value">Pte. Raúl Alfonsín 327, Río Gallegos</div>
+      </div>
+      <button class="copy-btn" onclick="event.stopPropagation(); copyText('Pte. Raúl Alfonsín 327, Río Gallegos, Santa Cruz', this)">Copiar</button>
+    </div>
+
+    <!-- Acuerdo CAPROMISA -->
+    <div class="agreement-box">
+      <div class="agreement-icon">🤝</div>
+      <div class="agreement-text">
+        <div class="agreement-label">Convenio institucional</div>
+        <div class="agreement-val">Asesoramiento y mejora de costos en seguros<br>para empresas asociadas a CAPROMISA</div>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="actions">
+      <a class="btn btn-whatsapp" href="https://wa.me/542966459102?text=Hola%20Carolina%2C%20te%20contacto%20por%20los%20seguros" target="_blank">
+        💬 WhatsApp
+      </a>
+      <button class="btn btn-email" onclick="copyText('asesoracarolinaposada@sancorsegurosrg.com.ar', this)">
+        ✉️ Copiar mail
+      </button>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-text"><strong>Grupo Sancor Seguros</strong> · Río Gallegos, Santa Cruz</div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">✓ Copiado</div>
+
+<script>
+function copyText(text, el) {
+  const copy = () => {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+  };
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).catch(copy);
+  } else { copy(); }
+
+  // Feedback on button
+  const btn = el.classList.contains('copy-btn') ? el : el.querySelector('.copy-btn');
+  if (btn) {
+    const orig = btn.textContent;
+    btn.textContent = '✓'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1800);
+  }
+
+  // Toast
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+</script>
+
+</body>
+</html>
